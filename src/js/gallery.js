@@ -1,6 +1,12 @@
-export function galeryCreator(e) {
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
+const searchForm = document.querySelector('.search-form');
+const bodyBuilding = document.querySelector('.gallery');
+
+export function galleryCreator(e) {
   e.preventDefault();
-  bodyOdy.innerHTML = '';
+  bodyBuilding.innerHTML = '';
   loading.classList.add('is-hidden');
   page = 1;
   q = searchForm.searchQuery.value;
@@ -31,7 +37,7 @@ export function galeryCreator(e) {
         )
         .join('');
       console.log(pictureArray);
-      bodyOdy.insertAdjacentHTML('beforeend', allPictures);
+      bodyBuilding.insertAdjacentHTML('beforeend', allPictures);
       lightbox = new SimpleLightbox('a', {
         captionsData: 'alt',
         captionDelay: 250,

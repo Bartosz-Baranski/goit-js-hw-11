@@ -2,10 +2,11 @@ import axios from 'axios';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { errorMsg } from './js/notiflix';
+// import { galleryCreator } from './js/gallery';
 
 const loading = document.querySelector('.load-more');
 const searchForm = document.querySelector('.search-form');
-const bodyOdy = document.querySelector('.gallery');
+const bodyBuilding = document.querySelector('.gallery');
 
 axios.defaults.baseURL = 'https://pixabay.com/api/';
 
@@ -51,7 +52,7 @@ function loadMorePics() {
         </div></a>`
       )
       .join('');
-    bodyOdy.insertAdjacentHTML('beforeend', Pictures);
+    bodyBuilding.insertAdjacentHTML('beforeend', Pictures);
     lightbox = new SimpleLightbox('a', {
       captionsData: 'alt',
       captionDelay: 250,
@@ -64,9 +65,9 @@ function loadMorePics() {
   });
 }
 
-function galeryCreator(e) {
+function galleryCreator(e) {
   e.preventDefault();
-  bodyOdy.innerHTML = '';
+  bodyBuilding.innerHTML = '';
   loading.classList.add('is-hidden');
   page = 1;
   q = searchForm.searchQuery.value;
@@ -97,7 +98,7 @@ function galeryCreator(e) {
         )
         .join('');
       console.log(pictureArray);
-      bodyOdy.insertAdjacentHTML('beforeend', allPictures);
+      bodyBuilding.insertAdjacentHTML('beforeend', allPictures);
       lightbox = new SimpleLightbox('a', {
         captionsData: 'alt',
         captionDelay: 250,
@@ -109,5 +110,5 @@ function galeryCreator(e) {
   });
 }
 
-searchForm.addEventListener('submit', galeryCreator);
+searchForm.addEventListener('submit', galleryCreator);
 loading.addEventListener('click', loadMorePics);
