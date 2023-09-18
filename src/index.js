@@ -11,9 +11,13 @@ axios.defaults.baseURL = 'https://pixabay.com/api/';
 
 loading.classList.add('is-hidden');
 
-let lightbox;
 let page = 1;
 let q = '';
+
+const lightbox = new SimpleLightbox('a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
 const apiKey = '39442093-f355f33fb27509f62e93d1955';
 
@@ -47,10 +51,7 @@ function picturesCreator(pictureArray) {
     )
     .join('');
   bodyBuilding.insertAdjacentHTML('beforeend', allPictures);
-  lightbox = new SimpleLightbox('a', {
-    captionsData: 'alt',
-    captionDelay: 250,
-  }).refresh();
+  lightbox.refresh();
 }
 
 function loadMorePics() {
@@ -77,7 +78,7 @@ function galleryCreator(e) {
 
   getUl(q, page).then(pictureArray => {
     if (pictureArray.totalHits === 0) {
-      errorMsg;
+      return errorMsg;
     } else {
       picturesCreator(pictureArray);
       if (pictureArray.totalHits > 40) {
