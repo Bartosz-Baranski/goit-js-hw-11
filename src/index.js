@@ -2,7 +2,6 @@ import axios from 'axios';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { errorMsg } from './js/notiflix';
-// import { galleryCreator } from './js/gallery';
 
 const loading = document.querySelector('.load-more');
 const searchForm = document.querySelector('.search-form');
@@ -25,7 +24,7 @@ async function getUl(userRequest, page) {
   return pictureArray.data;
 }
 
-function picturesCreator() {
+function picturesCreator(pictureArray) {
   const allPictures = pictureArray.hits
     .map(
       gallery => `<a class= "gallery-link" href="${gallery.largeImageURL}"><div class="photo-card">
@@ -60,7 +59,7 @@ function loadMorePics() {
   q = searchForm.searchQuery.value;
 
   getUl(q, page).then(pictureArray => {
-    picturesCreator();
+    picturesCreator(pictureArray);
     const allPages = Math.ceil(pictureArray.totalHits / 40);
     if (page >= allPages) {
       loading.classList.add('is-hidden');
@@ -80,7 +79,7 @@ function galleryCreator(e) {
     if (pictureArray.totalHits === 0) {
       errorMsg;
     } else {
-      picturesCreator();
+      picturesCreator(pictureArray);
       if (pictureArray.totalHits > 40) {
         loading.classList.remove('is-hidden');
       }
