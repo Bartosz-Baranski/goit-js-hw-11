@@ -14,7 +14,7 @@ loading.classList.add('is-hidden');
 let page = 1;
 let q = '';
 
-const lightbox = new SimpleLightbox('a', {
+const lightbox = new SimpleLightbox(' .gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
@@ -56,7 +56,6 @@ function picturesCreator(pictureArray) {
 
 function loadMorePics() {
   page += 1;
-  lightbox.destroy();
   q = searchForm.searchQuery.value;
 
   getUl(q, page).then(pictureArray => {
